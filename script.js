@@ -104,7 +104,6 @@ function makeGoodsByTemplate() {
     }
 
     return newGoods;
-
 }
 
 function addToContainer(elem) {
@@ -120,7 +119,7 @@ const searchInput = document.querySelector('#search-input');
 const nothingFound = document.querySelector('#nothing-found');
 let arr = [];
 
-searchButton.addEventListener('click', function() {
+function findGoods() {
     const searchText = searchInput.value.trim().toLowerCase();
 
     container.innerHTML = '';
@@ -136,10 +135,18 @@ searchButton.addEventListener('click', function() {
     }
 
     arr.forEach(addToContainer);
+
     if (arr.length == 0) {
         nothingFound.textContent = 'Ничего не найдено';
     }
 
-
     searchInput.value = '';
-})
+}
+
+searchButton.addEventListener('click', findGoods());
+
+searchInput.addEventListener('keydown', function(event) {
+    if (event.key == 'Enter') {
+        findGoods();
+    }
+});
